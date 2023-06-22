@@ -23,8 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index").permitAll()
-//                .antMatchers("/users", "/all-users").permitAll()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/editUser").permitAll()
 //                .antMatchers("/addNewUser", "/addNewUser").permitAll()
 //                .antMatchers("/", "/addNewUser").permitAll()
                 .anyRequest().authenticated()
@@ -47,20 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .roles("USER")
                         .build();
 
-        UserDetails user2 =
-                User.withDefaultPasswordEncoder()
-                        .username("user2")
-                        .password("user2")
-                        .roles("USER")
-                        .build();
+//        UserDetails user2 =
+//                User.withDefaultPasswordEncoder()
+//                        .username("user2")
+//                        .password("user2")
+//                        .roles("USER")
+//                        .build();
+//
+//        UserDetails admin =
+//                User.withDefaultPasswordEncoder()
+//                        .username("admin")
+//                        .password("admin")
+//                        .roles("ADMIN")
+//                        .build();
 
-        UserDetails admin =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("admin")
-                        .roles("ADMIN")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user2);
+        return new InMemoryUserDetailsManager(user);
     }
 }
