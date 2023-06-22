@@ -18,6 +18,10 @@ public class UsersController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String indexPage() {
+        return "index";
+    }
 
     @GetMapping("/users")
     public String showAllUsers(Model model) {
