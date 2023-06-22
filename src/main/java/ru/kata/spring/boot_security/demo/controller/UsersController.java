@@ -67,7 +67,7 @@ public class UsersController {
 
         userService.editUser(user);
 
-        return "redirect:/";
+        return "all-users";
     }
 
     @GetMapping("/deleteUserById")
