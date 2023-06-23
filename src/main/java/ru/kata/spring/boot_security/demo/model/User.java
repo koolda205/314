@@ -22,6 +22,9 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     public User() {
     }
 
@@ -29,6 +32,11 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.email = email;
+    }
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
     public Long getId() {
@@ -93,12 +101,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.name;
     }
 
     @Override
