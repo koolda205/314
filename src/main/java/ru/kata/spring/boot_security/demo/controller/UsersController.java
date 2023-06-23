@@ -10,11 +10,13 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @Controller
 public class UsersController {
 
+
     private final UserService userService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UsersController(UserService userServiceImpl, UserService userService) {
         this.userService = userService;
+
     }
 
 
@@ -26,15 +28,23 @@ public class UsersController {
         return "users";
     }
 
-    @PostMapping("/addNewUser")
+    @GetMapping("/admin")
+    public String admin(Model model) {
+
+
+        return "admin";
+    }
+
+    @PostMapping("/admin/addNewUser")
     public String saveUser(@ModelAttribute("user") User user) {
 
         userService.saveUser(user);
 
-        return "redirect:/users";
+        return "users";
+//        return "redirect:/users";
     }
 
-    @GetMapping("/findUsersById")
+    @GetMapping("admin/findUsersById")
     public String findUsersById(@RequestParam(value = "id", required = false) Long id,
                                 Model model) {
 
@@ -46,7 +56,7 @@ public class UsersController {
             return "user-info";
     }
 
-    @GetMapping("/editUserById")
+    @GetMapping("/admin/editUserById")
     public String editUsersById(@RequestParam(value = "id", required = false) Long id, Model model) {
 
         model.addAttribute("user", userService.getUserByID(id));
@@ -57,15 +67,15 @@ public class UsersController {
         return "edit";
     }
 
-    @PatchMapping("/editUser")
+    @PatchMapping("/admin/editUser")
     public String edit(@ModelAttribute("user") User user) {
 
         userService.editUser(user);
 
-        return "redirect:/";
+        return "users";
     }
 
-    @GetMapping("/deleteUserById")
+    @GetMapping("/admin/deleteUserById")
     public String deleteUser(@RequestParam(value = "id", required = false) Long id) {
 
         if (userService.getUserByID(id) == null) {
@@ -73,7 +83,7 @@ public class UsersController {
         }
         userService.deleteUserByID(id);
 
-        return "redirect:/";
+        return "users";
     }
 
 
