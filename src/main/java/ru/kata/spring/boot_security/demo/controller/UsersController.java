@@ -19,7 +19,6 @@ public class UsersController {
 
     }
 
-
     @GetMapping("/users")
     public String showAllUsers(Model model) {
 
