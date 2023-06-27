@@ -36,7 +36,7 @@ public class UsersController {
 
         model.addAttribute("users", userService.getAllUsers());
 
-        return "users";
+        return "admin";
     }
 
     @PostMapping("/addNewUser")
@@ -44,7 +44,7 @@ public class UsersController {
 
         userService.saveUser(user);
 
-        return "users";
+        return "admin";
     }
 
     @GetMapping("/findUsersById")
@@ -75,7 +75,7 @@ public class UsersController {
 
         userService.editUser(user);
 
-        return "users";
+        return "admin";
     }
 
     @GetMapping("/deleteUserById")
@@ -86,7 +86,7 @@ public class UsersController {
         }
         userService.deleteUserByID(id);
 
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
 
