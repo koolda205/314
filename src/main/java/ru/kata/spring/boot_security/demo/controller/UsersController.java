@@ -26,9 +26,9 @@ public class UsersController {
     @GetMapping("/users")
     public String showAllUsers(Model model) {
 
-        model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
 
-        return "all-users";
+        return "users";
     }
 
     @PostMapping("/addNewUser")
@@ -36,7 +36,7 @@ public class UsersController {
 
         userService.saveUser(user);
 
-        return "all-users";
+        return "users";
     }
 
     @GetMapping("/findUsersById")
@@ -67,7 +67,7 @@ public class UsersController {
 
         userService.editUser(user);
 
-        return "all-users";
+        return "users";
     }
 
     @GetMapping("/deleteUserById")
