@@ -22,9 +22,10 @@
 
     <tr th:each="user : ${users}">
         <td th:utext="${user.id}">
-        <td th:utext="${user.name}">
+        <td th:utext="${user.username}">
         <td th:utext=" ${user.surname}">
         <td th:utext="${user.email}">
+        <td th:utext="${user.password}">
     </tr>
 
 </table>
@@ -36,8 +37,8 @@
 Add New User
 <form method="post" action="/admin/addNewUser">
 
-    <label for="name">Name</label>
-    <input name="name" type="text" id="name"/>
+    <label for="username">Name</label>
+    <input name="username" type="text" id="username"/>
 
     <br>
 
@@ -61,7 +62,7 @@ Add New User
 
 <form action="findUsersById" method="get">
 
-    <label for="name">Get User by ID</label>
+    <label for="username">Get User by ID</label>
     <input type="text" name="id"
            placeholder="Write user ID"/>
     <br>
@@ -75,7 +76,7 @@ Add New User
 
 <form action="/admin/editUserById" method="get">
 
-    <label for="name">Edit Users By ID</label>
+    <label for="username">Edit Users By ID</label>
     <input type="text" name="id"
            placeholder="Write user ID"/>
     <br>
@@ -88,7 +89,7 @@ Add New User
 
 <form action="/admin/deleteUserById" method="get">
     <input type="hidden" name="_method" value="DELETE">
-    <label for="name">Delete Users By ID</label>
+    <label for="username">Delete Users By ID</label>
     <input type="text" name="id"
            placeholder="Write user ID"/>
     <br>

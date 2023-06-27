@@ -18,11 +18,12 @@
         <th>Name</th>
         <th>Last Name</th>
         <th>Email</th>
+        <th>Password</th>
     </tr>
 
     <tr th:each="user : ${users}">
         <td th:utext="${user.id}">
-        <td th:utext="${user.name}">
+        <td th:utext="${user.username}">
         <td th:utext=" ${user.surname}">
         <td th:utext="${user.email}">
     </tr>
