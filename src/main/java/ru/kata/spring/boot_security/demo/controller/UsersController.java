@@ -10,7 +10,6 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @Controller
 public class UsersController {
 
-
     private final UserService userService;
 
     @Autowired
@@ -19,10 +18,16 @@ public class UsersController {
 
     }
 
+    @GetMapping("/")
+    public String welcomePage() {
+
+        return "welcome";
+    }
+
     @GetMapping("/users")
     public String showAllUsers(Model model) {
 
-        model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
 
         return "users";
     }
@@ -30,6 +35,7 @@ public class UsersController {
     @GetMapping("/admin")
     public String admin(Model model) {
 
+        model.addAttribute("users", userService.getAllUsers());
 
         return "admin";
     }
@@ -39,11 +45,11 @@ public class UsersController {
 
         userService.saveUser(user);
 
-        return "users";
+        return "redirect:/admin";
 //        return "redirect:/users";
     }
 
-    @GetMapping("admin/findUsersById")
+    @GetMapping("/findUsersById")
     public String findUsersById(@RequestParam(value = "id", required = false) Long id,
                                 Model model) {
 
@@ -55,7 +61,7 @@ public class UsersController {
             return "user-info";
     }
 
-    @GetMapping("/admin/editUserById")
+    @GetMapping("/editUserById")
     public String editUsersById(@RequestParam(value = "id", required = false) Long id, Model model) {
 
         model.addAttribute("user", userService.getUserByID(id));
@@ -66,15 +72,15 @@ public class UsersController {
         return "edit";
     }
 
-    @PatchMapping("/admin/editUser")
+    @PatchMapping("/editUser")
     public String edit(@ModelAttribute("user") User user) {
 
         userService.editUser(user);
 
-        return "users";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/admin/deleteUserById")
+    @GetMapping("/deleteUserById")
     public String deleteUser(@RequestParam(value = "id", required = false) Long id) {
 
         if (userService.getUserByID(id) == null) {
@@ -82,7 +88,7 @@ public class UsersController {
         }
         userService.deleteUserByID(id);
 
-        return "users";
+        return "redirect:/admin";
     }
 
 

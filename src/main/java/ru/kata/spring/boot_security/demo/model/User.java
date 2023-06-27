@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ruser")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -25,7 +25,14 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    private Role role;
+
     public User() {
+    }
+
+
+    public User(Role role) {
+        this.role = role;
     }
 
     public User(String name, String surname, String email) {
