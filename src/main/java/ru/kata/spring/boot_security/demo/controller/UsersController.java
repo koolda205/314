@@ -31,6 +31,14 @@ public class UsersController {
         return "users";
     }
 
+    @GetMapping("/admin")
+    public String showAdminPage(Model model) {
+
+        model.addAttribute("users", userService.getAllUsers());
+
+        return "users";
+    }
+
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") User user) {
 
