@@ -6,8 +6,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,39 +18,42 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private UserRepository userRepository;
 
+    @Transactional
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userRepository.findAll();
     }
 
     @Transactional
     @Override
     public void saveUser (User user) {
-        userDao.saveUser (user);
+        userRepository.save(user);
     }
 
     @Override
     public User getUserByID(Long id) {
-        return userDao.getUserByID(id);
+        User user = null;
+        Optional<User> optional = userRepository.findById((long) Math.toIntExact(id));
+        if (optional.isPresent()) {
+            user = optional.get();
+        }
+        return user;
     }
 
     @Transactional
     @Override
     public void editUser(User user) {
-        userDao.editUser(user);
+        userRepository.save(user);
     }
 
     @Transactional
-    @Override
     public void deleteUserByID(Long id) {
-        userDao.deleteUserByID(id);
+        long i = Math.toIntExact((long) id);
+        userRepository.deleteAllById(Collections.singleton(i));
     }
 
 //    @Transactional
