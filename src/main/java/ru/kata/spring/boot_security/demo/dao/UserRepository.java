@@ -6,6 +6,5 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT nextval(pg_get_serial_sequence('users', 'id'))", nativeQuery = true)
-    Long getNextId();
+    User findByUsername(String username);
 }
