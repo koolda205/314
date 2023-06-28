@@ -55,16 +55,15 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteAllById(Collections.singleton(i));
     }
 
-    @Transactional
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-              User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//        User user = userRepository.findByUsername(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//        return user;
+//    }
 }
 
 
