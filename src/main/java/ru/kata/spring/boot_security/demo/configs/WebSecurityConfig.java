@@ -40,20 +40,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET,"/users/**")
+                .antMatchers(HttpMethod.GET,"/users/")
                 .hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST,"/admin/**")
+                .antMatchers(HttpMethod.POST,"/admin/")
                 .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE,"/admin/**")
+                .antMatchers(HttpMethod.DELETE,"/admin/")
                 .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+//                .formLogin().successHandler(successUserHandler)
+                .formLogin();
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .permitAll();
     }
 
     // аутентификация inMemory
