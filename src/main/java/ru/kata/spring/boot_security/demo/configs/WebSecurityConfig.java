@@ -22,17 +22,17 @@ import java.beans.BeanProperty;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
-    @Autowired
-    public UserService getUserService() {
-        return userService;
-    }
+//    private UserService userService;
+//    @Autowired
+//    public UserService getUserService() {
+//        return userService;
+//    }
 
-    private final SuccessUserHandler successUserHandler;
-
-    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
-        this.successUserHandler = successUserHandler;
-    }
+//    private final SuccessUserHandler successUserHandler;
+//
+//    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
+//        this.successUserHandler = successUserHandler;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,20 +40,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET,"/users/**")
+                .antMatchers(HttpMethod.GET,"/users/")
                 .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST,"/admin/**")
+                .antMatchers(HttpMethod.POST,"/admin/")
                 .hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE,"/admin/**")
+                .antMatchers(HttpMethod.DELETE,"/admin/")
                 .hasRole(Role.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+//                .formLogin().successHandler(successUserHandler)
+                .formLogin();
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .permitAll();
     }
 
     // аутентификация inMemory
