@@ -11,7 +11,7 @@ import java.util.Set;
 import static org.apache.catalina.realm.UserDatabaseRealm.getRoles;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users1")
 public class User implements UserDetails {
 
     @Id
@@ -31,6 +31,12 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    @Column(name = "status")
+    private String status;
 
     @Transient
     private String passwordConfirm;
