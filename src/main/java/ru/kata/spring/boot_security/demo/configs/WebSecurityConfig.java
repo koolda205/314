@@ -9,8 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.beans.BeanProperty;
 
 @Configuration
 @EnableWebSecurity
@@ -49,21 +53,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
-                User.withDefaultPasswordEncoder()
+                User.builder()
                         .username("user")
-                        .password("user")
+                        .password(passwordEncoder().encode("user"))
                         .roles("USER")
                         .build();
 
         UserDetails admin =
-                User.withDefaultPasswordEncoder()
+                User.builder()
                         .username("admin")
-                        .password("admin")
-                        .roles("USER", "ADMIN")
+                        .password(passwordEncoder().encode("admin"))
+                        .roles("ADMIN")
                         .build();
 
         return new InMemoryUserDetailsManager(user, admin);
     }
 
-
+    @Bean
+    protected PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(12);
+    }
 }
