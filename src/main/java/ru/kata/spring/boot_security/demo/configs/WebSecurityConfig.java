@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import ru.kata.spring.boot_security.demo.model.Permission;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -40,12 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET,"/users/")
-                .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST,"/admin/")
-                .hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE,"/admin/")
-                .hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET,"/users/").hasAuthority(Permission.USERS_READ.getPermission())
+                .antMatchers(HttpMethod.POST,"/admin/").hasAuthority(Permission.USERS_WRITE.getPermission())
+                .antMatchers(HttpMethod.DELETE,"/admin/").hasAuthority(Permission.USERS_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -63,21 +61,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user =
+        return new InMemoryUserDetailsManager(
                 User.builder()
                         .username("user")
                         .password(passwordEncoder().encode("user"))
-                        .roles("USER")
-                        .build();
-
-        UserDetails admin =
+                        .authorities(Role.USER.getAuthorities())
+                        .build(),
                 User.builder()
                         .username("admin")
                         .password(passwordEncoder().encode("admin"))
-                        .roles("ADMIN")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+                        .authorities(Role.ADMIN.getAuthorities())
+                        .build()
+        );
     }
 
     @Bean
