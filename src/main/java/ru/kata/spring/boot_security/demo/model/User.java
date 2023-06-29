@@ -5,10 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
-
-import static org.apache.catalina.realm.UserDatabaseRealm.getRoles;
 
 @Entity
 @Table(name = "users1")
@@ -31,12 +27,12 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
-    private String role;
-
+    private Role role;
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @Transient
     private String passwordConfirm;
@@ -46,12 +42,6 @@ public class User implements UserDetails {
 //    private Set<Role> roles;
 
     public User() {
-    }
-
-    public User(String username, String surname, String email) {
-        this.username = username;
-        this.surname = surname;
-        this.email = email;
     }
 
     public Long getId() {
@@ -78,8 +68,26 @@ public class User implements UserDetails {
         return email;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+
+
     }
 
 //    @Override
