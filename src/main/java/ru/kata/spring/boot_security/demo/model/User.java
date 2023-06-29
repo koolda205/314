@@ -35,9 +35,9 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany
-    @JoinTable(name = "users_roles")
-    private Set<Role> roles;
+//    @ManyToMany
+//    @JoinTable(name = "users_roles")
+//    private Set<Role> roles;
 
     public User() {
     }
@@ -102,13 +102,13 @@ public class User implements UserDetails {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 
     @Override
     public String getUsername() {
