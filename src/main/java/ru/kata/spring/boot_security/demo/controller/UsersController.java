@@ -24,6 +24,11 @@ public class UsersController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping("/users")
     public String showAllUsers(Model model) {
 

@@ -44,8 +44,10 @@ import java.beans.BeanProperty;
                 .authenticated()
                 .and()
 //                .formLogin().successHandler(successUserHandler)
-                .formLogin();
-//                .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/users");
 //                .and()
 //                .logout()
 //                .permitAll();
