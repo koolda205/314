@@ -44,7 +44,7 @@ public class UsersController {
 
         userService.saveUser(user);
 
-        return "admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/findUsersById")
@@ -75,7 +75,7 @@ public class UsersController {
 
         userService.editUser(user);
 
-        return "admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/deleteUserById")
