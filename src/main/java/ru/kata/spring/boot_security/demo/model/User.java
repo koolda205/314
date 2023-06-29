@@ -76,10 +76,14 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return getRoles();
+//    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
-    }
+    return null;
+}
 
     @Override
     public String getPassword() {
