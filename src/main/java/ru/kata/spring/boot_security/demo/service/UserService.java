@@ -19,6 +19,11 @@ import java.util.List;
 
     void deleteUserByID(Long id);
 
+    User findByUsername(String username);
+
+
+
+
 
 }
 
