@@ -87,7 +87,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
-
     }
 
     @Bean
