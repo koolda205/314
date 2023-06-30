@@ -62,24 +62,28 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteAllById(Collections.singleton(i));
     }
 
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
 //    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-
-            }
-            private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
-            }
+//    public User findByUsername(String username) {
+//        return userRepository.findByUsername(username);
+//    }
+//
+////    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//        User user = userRepository.findByUsername(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+//
+//            }
+////            private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+////        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+////            }
+//
+//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+//        return null;
+//    }
 
 
 }
