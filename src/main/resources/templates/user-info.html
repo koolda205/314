@@ -20,18 +20,20 @@
         <th>Name</th>
         <th>Last Name</th>
         <th>Email</th>
+        <th>Password</th>
     </tr>
 
         <td th:utext="${user.id}">
         <td th:utext="${user.username}">
         <td th:utext=" ${user.surname}">
         <td th:utext="${user.email}">
+        <td th:utext="${user.password}">
 
 </table>
 
 <br><br>
 
-<a href="/users">all users page</a>
+<a href="/admin">admin page</a>
 
 </body>
 </html>

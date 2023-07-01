@@ -26,10 +26,24 @@
         <td th:utext="${user.username}">
         <td th:utext=" ${user.surname}">
         <td th:utext="${user.email}">
+        <td th:utext="${user.password}">
     </tr>
 
 </table>
 
+<br>
+<br>
+
 <a href="/admin">admin page</a>
+
+<br>
+<br>
+
+<a href="/logout">logout</a>
+
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+
 </body>
 </html>

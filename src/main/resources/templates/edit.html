@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,16 +9,15 @@
 
 <h2>Edit User</h2>
 
-
 <form method="post" action="/editUser" th:object="${user}">
     <input type="hidden" name="_method" value="PATCH">
     <br>
-        <label for="username">Id</label>
+        <label for="id">Id</label>
         <input readonly type="number" th:field="*{id}" id="id">
     <br>
     <br>
         <label for="username">Name</label>
-        <input type="text" th:field="*{name}" id="username" required/>
+        <input type="text" th:field="*{username}" id="username" required/>
     <br>
     <br>
         <label for="surname">Surname</label>
@@ -29,6 +28,10 @@
         <input type="text" th:field="*{email}" id="email" required/>
     <br>
     <br>
+        <label for="password">Password</label>
+        <input type="text" th:field="*{password}" id="password" required/>
+    <br>
+    <br>
         <input type="submit" value="Edit User">
 
 </form>
@@ -36,7 +39,7 @@
     <br>
     <br>
 
-<a href="/users">all users page</a>
+<a href="/admin">admin page</a>
 
 </body>
 </html>
