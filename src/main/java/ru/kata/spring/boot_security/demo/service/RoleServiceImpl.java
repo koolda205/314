@@ -12,6 +12,10 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
+    @Autowired
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public List<Role> getAllRoles() {
@@ -24,14 +28,14 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);
     }
 
-
     @Override
-    @Transactional
-    public void addRole(Role role) {
-        roleRepository.addRole(role);
+    public Role getRole(String userRole) {
+        return ((Role) roleRepository).getRole();
     }
+
 }
