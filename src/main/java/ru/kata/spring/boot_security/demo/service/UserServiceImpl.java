@@ -1,91 +1,70 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.dao.UserRepository;
-import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @Service
-@Transactional(readOnly = true)
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
+    private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
-    private UserRepository userRepository;
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Lazy
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     @Transactional
+    public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userDao.saveUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        if (!user.getPassword().equals(userDao.getUserById(user.getId()).getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userDao.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(long id) {
+        userDao.deleteUser(id);
+    }
+
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Transactional
-    @Override
-    public void saveUser (User user) {
-        userRepository.save(user);
+        return userDao.getAllUsers();
     }
 
     @Override
-    public User getUserByID(Long id) {
-        User user = null;
-        Optional<User> optional = userRepository.findById((long) Math.toIntExact(id));
-        if (optional.isPresent()) {
-            user = optional.get();
-        }
-        return user;
+    public User getUserByLogin(String login) {
+        return userDao.getUserByLogin(login);
     }
 
-    @Transactional
     @Override
-    public void editUser(User user) {
-        userRepository.save(user);
+    public User getUserById(long id) {
+        return userDao.getUserById(id);
     }
 
-    @Transactional
-    public void deleteUserByID(Long id) {
-        long i = Math.toIntExact((long) id);
-        userRepository.deleteAllById(Collections.singleton(i));
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        return userDao.getUserByLogin(login);
     }
-
-//    @Override
-//    public User findByUsername(String username) {
-//        return userRepository.findByUsername(username);
-//    }
-//
-////    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//        User user = userRepository.findByUsername(username);
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
-//
-//            }
-////            private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-////        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
-////            }
-//
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-//        return null;
-//    }
-
-
 }
-
-

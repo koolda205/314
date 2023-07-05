@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 
@@ -13,10 +14,12 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 public class UsersController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UsersController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/")
@@ -58,9 +61,9 @@ public class UsersController {
     public String findUsersById(@RequestParam(value = "id", required = false) Long id,
                                 Model model) {
 
-        model.addAttribute("user", userService.getUserByID(id));
+        model.addAttribute("user", userService.getUserById(id));
 
-        if (userService.getUserByID(id) == null) {
+        if (userService.getUserById(id) == null) {
             return "error-page";
         }
             return "user-info";
@@ -70,9 +73,9 @@ public class UsersController {
     @PreAuthorize("hasAnyAuthority('users:read')")
     public String editUsersById(@RequestParam(value = "id", required = false) Long id, Model model) {
 
-        model.addAttribute("user", userService.getUserByID(id));
+        model.addAttribute("user", userService.getUserById(id));
 
-        if (userService.getUserByID(id) == null) {
+        if (userService.getUserById(id) == null) {
             return "error-page";
         }
         return "edit";
@@ -82,7 +85,7 @@ public class UsersController {
     @PreAuthorize("hasAnyAuthority('users:write')")
     public String edit(@ModelAttribute("user") User user) {
 
-        userService.editUser(user);
+        userService.updateUser(user);
 
         return "redirect:/admin";
     }
@@ -91,10 +94,10 @@ public class UsersController {
     @PreAuthorize("hasAnyAuthority('users:write')")
     public String deleteUser(@RequestParam(value = "id", required = false) Long id) {
 
-        if (userService.getUserByID(id) == null) {
+        if (userService.getUserById(id) == null) {
             return "error-page";
         }
-        userService.deleteUserByID(id);
+        userService.deleteUser(id);
 
         return "redirect:/admin";
     }
