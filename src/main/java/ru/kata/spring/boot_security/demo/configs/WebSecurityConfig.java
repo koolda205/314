@@ -53,7 +53,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/login")
                 .permitAll();
     }
 
