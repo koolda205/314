@@ -39,7 +39,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+//                .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasAnyAuthority('ADMIN')")
                 .antMatchers("/users/**").access("hasAnyAuthority('ADMIN', 'USER')")
                 .anyRequest()
