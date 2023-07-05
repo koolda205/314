@@ -41,22 +41,23 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasAnyAuthority('ADMIN')")
-                .antMatchers("/user/**").access("hasAnyAuthority('ADMIN', 'USER')")
+                .antMatchers("/users/**").access("hasAnyAuthority('ADMIN', 'USER')")
                 .anyRequest()
                 .authenticated()
                 .and()
-//                .formLogin().successHandler(successUserHandler)
-                .formLogin()
+                .formLogin().successHandler(successUserHandler)
+                .loginProcessingUrl("/login")
+                .usernameParameter("j_login")
+                .passwordParameter("j_password")
                 .permitAll()
-//                .defaultSuccessUrl("/users")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login");
-//                .permitAll();
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     // аутентификация inMemory
