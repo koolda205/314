@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.util;
+package ru.kata.spring.boot_security.demo.Init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,12 +13,12 @@ import java.util.Set;
 
 
 @Component
-public class DBInit {
+public class InitUser {
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public DBInit(UserService userService, RoleService roleService) {
+    public InitUser(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
