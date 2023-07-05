@@ -19,21 +19,32 @@
         <th>Id</th>
         <th>Name</th>
         <th>Surname</th>
+        <th>Age</th>
         <th>Email</th>
         <th>Password</th>
+        <th>Login</th>
+        <th>Roles</th>
     </tr>
 
         <td th:utext="${user.id}">
         <td th:utext="${user.name}">
         <td th:utext=" ${user.surname}">
+        <td th:utext=" ${user.age}">
         <td th:utext="${user.email}">
         <td th:utext="${user.password}">
+        <td th:utext="${user.login}">
+        <td th:utext="${user.roles}">
+
 
 </table>
 
 <br><br>
+<a href="/admin">Back</a>
+<br><br>
 
-<a href="/admin">admin page</a>
+<form action="/logout" method="post">
+    <button type="submit">Exit</button>
+</form>
 
 </body>
 </html>
