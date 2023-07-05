@@ -25,15 +25,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //    public UserService getUserService() {
 //        return userService;
 //    }
-
+//
 //    private final SuccessUserHandler successUserHandler;
 //
 //    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
 //        this.successUserHandler = successUserHandler;
 //    }
         private final UserDetailsService userDetailsService;
+
         @Autowired
-        public WebSecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+        public WebSecurityConfig(UserDetailsService userDetailsService) {
             this.userDetailsService = userDetailsService;
         }
 
