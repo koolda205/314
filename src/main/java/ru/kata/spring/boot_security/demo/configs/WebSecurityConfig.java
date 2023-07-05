@@ -1,10 +1,7 @@
 package ru.kata.spring.boot_security.demo.configs;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,62 +24,38 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //    }
 //
 //    private final SuccessUserHandler successUserHandler;
-//
-//    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
+
+    private final UserDetailsService userDetailsService;
+
+    public WebSecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    //    @Autowired
+//    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
 //        this.successUserHandler = successUserHandler;
+//        this.userDetailsService = userDetailsService;
 //    }
-        private final UserDetailsService userDetailsService;
-
-        @Autowired
-        public WebSecurityConfig(UserDetailsService userDetailsService) {
-            this.userDetailsService = userDetailsService;
-        }
-
-        @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-//
+                .antMatchers("/", "/index").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
 //                .formLogin().successHandler(successUserHandler)
                 .formLogin()
-                .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/users")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login");
-//                .permitAll();
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .and().csrf().disable();
     }
-
-    // аутентификация inMemory
-
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                User.builder()
-//                        .username("user")
-//                        .password(passwordEncoder().encode("user"))
-//                        .authorities(Role.USER.getAuthorities())
-//                        .build(),
-//                User.builder()
-//                        .username("admin")
-//                        .password(passwordEncoder().encode("admin"))
-//                        .authorities(Role.ADMIN.getAuthorities())
-//                        .build()
-//        );
-//    }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
