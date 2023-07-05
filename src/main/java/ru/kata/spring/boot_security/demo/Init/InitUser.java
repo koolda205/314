@@ -42,10 +42,11 @@ public class InitUser {
                 "user", adminSet);
         User admin = new User("Dmitrii", "Kulakov", 33, "kulakov@mail.com", "admin",
                 "amin", userSet);
-        User user1 = new User("Dm", "Ku", 3, "ku@mail.com", "user",
-                "user", userSet);
+        User user1 = new User("Dm", "Ku", 3, "ku@mail.com", "user1",
+                "user1", userSet);
 
         userService.saveUser(user);
         userService.saveUser(admin);
+        userService.saveUser(user1);
     }
 }
