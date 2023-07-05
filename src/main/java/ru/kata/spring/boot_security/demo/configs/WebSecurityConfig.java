@@ -1,10 +1,8 @@
 package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,15 +24,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //        return userService;
 //    }
 //
-//    private final SuccessUserHandler successUserHandler;
-//
-//    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
-//        this.successUserHandler = successUserHandler;
-//    }
+        private final SuccessUserHandler successUserHandler;
+
         private final UserDetailsService userDetailsService;
 
         @Autowired
-        public WebSecurityConfig(UserDetailsService userDetailsService) {
+        public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
+            this.successUserHandler = successUserHandler;
             this.userDetailsService = userDetailsService;
         }
 
@@ -48,8 +44,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
                 .anyRequest()
                 .authenticated()
                 .and()
-//                .formLogin().successHandler(successUserHandler)
-                .formLogin()
+                .formLogin().successHandler(successUserHandler)
+//                .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/users")
