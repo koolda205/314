@@ -61,7 +61,7 @@ public class UsersController {
     public String findUsersById(@RequestParam(value = "id", required = false) Long id,
                                 Model model) {
 
-        model.addAttribute("user", userService.getUserByID(id));
+        model.addAttribute("user", userService.getUserById(id));
 
         if (userService.getUserById(id) == null) {
             return "error-page";
