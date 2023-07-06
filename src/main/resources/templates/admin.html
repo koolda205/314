@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -73,8 +74,17 @@ Add New User
 
     <br>
 
+<!--    <label for="roles">Role</label>-->
+<!--    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>-->
+<!--        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">-->
+<!--            <th:block th:text="${role.userRole}">-->
+<!--            </th:block>-->
+
     <label for="roles">Role</label>
-    <input name="roles" type="text" id="roles"/>
+    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
+        <option value="ADMIN" label="ADMIN">
+        <option value="USER" label="USER">
+    </option>>
 
     <br>
 
