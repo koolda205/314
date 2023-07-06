@@ -32,18 +32,17 @@
         <input type="text" th:field="*{email}" id="email" required/>
     <br>
     <br>
-        <label for="email">Login</label>
-        <input type="text" th:field="*{login}" id="login" required/>
-    <br>
-    <br>
         <label for="password">Password</label>
         <input type="text" th:field="*{password}" id="password" required/>
     <br>
     <br>
-        <label for="roles">Roles</label>
-        <input type="text" th:field="*{roles}" id="roles" required/>
-    <br>
-    <br>
+    <label for="roles">Role</label>
+    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
+        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">
+            <th:block th:text="${role.userRole}">
+            </th:block>
+        </option>>
+
         <input type="submit" value="Edit User">
 
 </form>

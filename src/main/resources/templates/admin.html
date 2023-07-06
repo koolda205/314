@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +20,6 @@
         <th>Age</th>
         <th>Email</th>
         <th>Password</th>
-        <th>Login</th>
         <th>Roles</th>
     </tr>
 
@@ -32,7 +30,6 @@
         <td th:utext=" ${user.age}">
         <td th:utext="${user.email}">
         <td th:utext="${user.password}">
-        <td th:utext="${user.login}">
         <td th:utext="${user.roles}">
     </tr>
 
@@ -69,24 +66,15 @@ Add New User
 
     <br>
 
-    <label for="login">Login</label>
-    <input name="login" type="text" id="login"/>
-
-    <br>
-
-<!--    <label for="roles">Role</label>-->
-<!--    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>-->
-<!--        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">-->
-<!--            <th:block th:text="${role.userRole}">-->
-<!--            </th:block>-->
-
     <label for="roles">Role</label>
     <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
-        <option value="ADMIN" label="ADMIN">
-        <option value="USER" label="USER">
-    </option>>
+        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">
+            <th:block th:text="${role.userRole}">
+            </th:block>
+        </option>>
 
     <br>
+        <br>
 
     <input type="submit" value="Add User">
 

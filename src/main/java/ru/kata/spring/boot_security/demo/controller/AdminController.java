@@ -37,9 +37,9 @@ public class AdminController {
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
 
-//        model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("roles", roleService.getAllRoles());
         userService.saveUser(user);
-        roleService.addRole((Role) user.getRoles());
+
 
         return "redirect:/admin";
     }
@@ -59,6 +59,8 @@ public class AdminController {
     public String editUsersById(@RequestParam(value = "id", required = false) Long id, Model model) {
 
         model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("roles", roleService.getAllRoles());
 
         if (userService.getUserById(id) == null) {
             return "error-page";
