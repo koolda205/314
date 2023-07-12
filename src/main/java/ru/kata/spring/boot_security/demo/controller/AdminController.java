@@ -73,7 +73,7 @@ public class AdminController {
 
         userService.updateUser(user);
 
-        return "/admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/deleteUserById")

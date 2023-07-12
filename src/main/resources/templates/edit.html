@@ -38,7 +38,7 @@
     <br>
     <label for="roles">Role</label>
     <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
-        <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">
+        <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
             <th:block th:text="${role.userRole}">
             </th:block>
         </option>>
@@ -50,7 +50,10 @@
     <br>
     <br>
 
-<a href="/admin">admin page</a>
+<br><br>
+<a href="/admin">Back</a>
+<br><br>
+
 
 </body>
 </html>
