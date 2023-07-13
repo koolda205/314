@@ -1,11 +1,9 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -43,6 +41,7 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+
     @GetMapping("/findUsersById")
     public String findUsersById(@RequestParam(value = "id", required = false) Long id,
                                 Model model) {
@@ -52,7 +51,7 @@ public class AdminController {
         if (userService.getUserById(id) == null) {
             return "error-page";
         }
-            return "user-info";
+        return "user-info";
     }
 
     @GetMapping("/editUserById")
