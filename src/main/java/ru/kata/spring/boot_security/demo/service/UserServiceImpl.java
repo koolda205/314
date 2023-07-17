@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
@@ -63,8 +63,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDao.getUserById(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return userDao.getUserByLogin(login);
-    }
+
 }
