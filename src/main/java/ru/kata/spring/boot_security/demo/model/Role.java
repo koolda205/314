@@ -5,14 +5,12 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "roles")
 public class Role implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "role", unique = true)
     private String userRole;
 
     public Role() {
