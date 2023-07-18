@@ -18,12 +18,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //    private UserService userService;
-//    @Autowired
-//    public UserService getUserService() {
-//        return userService;
-//    }
-//
     private final SuccessUserHandler successUserHandler;
 
     private final UserDetailsService userDetailsService;
@@ -56,27 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                 .permitAll();
     }
-
-    // аутентификация inMemory
-
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                User.builder()
-//                        .username("user")
-//                        .password(passwordEncoder().encode("user"))
-//                        .authorities(Role.USER.getAuthorities())
-//                        .build(),
-//                User.builder()
-//                        .username("admin")
-//                        .password(passwordEncoder().encode("admin"))
-//                        .authorities(Role.ADMIN.getAuthorities())
-//                        .build()
-//        );
-//    }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

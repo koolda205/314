@@ -13,7 +13,7 @@ public class UsersController {
 
     @GetMapping("login")
     public String indexPage() {
-        return "/login";
+        return "/welcome";
     }
 
     @GetMapping("user-info")
