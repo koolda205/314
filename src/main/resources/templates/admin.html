@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<table th:border="1" th:width="500" th:high="300" bg th:color="red">
+<table th:border="1" th:width="500" th:high="300" th:color="red">
 
     <caption><h2>Admin User list</h2></caption>
 
@@ -72,7 +72,6 @@ Add New User
             <th:block th:text="${role.userRole}">
             </th:block>
         </option>>
-
         <input type="submit" value="Add User">
 
 </form>
@@ -82,13 +81,13 @@ Add New User
 
 
 <form action="/findUsersById" method="get">
-
     <label for="name">Get User by ID</label>
-    <input type="text" name="id"
-           placeholder="Write user ID"/>
+    <label>
+        <input type="text" name="id"
+               placeholder="Write user ID"/>
+    </label>
     <br>
     <td><input type="submit" value="Find User"/></td>
-
 </form>
 
 <br>
@@ -96,13 +95,13 @@ Add New User
 
 
 <form action="/editUserById" method="get">
-
     <label for="name">Edit Users By ID</label>
-    <input type="text" name="id"
-           placeholder="Write user ID"/>
+    <label>
+        <input type="text" name="id"
+               placeholder="Write user ID"/>
+    </label>
     <br>
     <td><input type="submit" value="Edit User"/></td>
-
 </form>
 
 <br><br>
@@ -111,11 +110,12 @@ Add New User
 <form action="/deleteUserById" method="get">
     <input type="hidden" name="_method" value="DELETE">
     <label for="name">Delete Users By ID</label>
-    <input type="text" name="id"
-           placeholder="Write user ID"/>
+    <label>
+        <input type="text" name="id"
+               placeholder="Write user ID"/>
+    </label>
     <br>
     <td><input type="submit" value="Remove User"/></td>
-
 </form>
 
 <br><br>
