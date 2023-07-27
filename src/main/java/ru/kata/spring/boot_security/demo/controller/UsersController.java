@@ -10,11 +10,11 @@ import ru.kata.spring.boot_security.demo.model.User;
 @Controller
 @RequestMapping("/")
 public class UsersController {
-
-    @GetMapping("login")
-    public String indexPage() {
-        return "/welcome";
-    }
+//
+//    @GetMapping("login")
+//    public String indexPage() {
+//        return "/welcome";
+//    }
 
     @GetMapping("user-info")
     public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
