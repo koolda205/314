@@ -37,7 +37,8 @@
 
     <tr th:each="user : ${users}">
         <td th:utext="${user.id}">
-        <td th:utext="${user.name}">
+        <td><a th:href="@{/findUsersById{id}(id=${user.getId()})}"
+               th:text="${user.getName()}">user</a></td>
         <td th:utext=" ${user.surname}">
         <td th:utext=" ${user.age}">
         <td th:utext="${user.email}">

@@ -39,8 +39,8 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/findUsersById")
-    public String findUsersById(@RequestParam(value = "id", required = false) Long id,
+    @GetMapping("/findUsersById{id}")
+    public String findUsersById(@PathVariable("id") Long id,
                                 Model model) {
 
         model.addAttribute("user", userService.getUserById(id));
