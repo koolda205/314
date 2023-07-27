@@ -45,7 +45,7 @@ public class AdminController {
 
         model.addAttribute("user", userService.getUserById(id));
 
-        if (userService.getUserById(id) == null) {
+        if (userService.getUserById(id) == null)  {
             return "error-page";
         }
         return "user-info";
