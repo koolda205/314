@@ -29,12 +29,19 @@ public class AdminController {
         return "admin";
     }
 
+    @GetMapping("/new")
+    public String newUser(Model model) {
+
+        model.addAttribute("users", new User());
+//        model.addAttribute("roles", roleService.getAllRoles());
+        return "new";
+    }
+
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
 
         model.addAttribute("roles", roleService.getAllRoles());
         userService.saveUser(user);
-
 
         return "redirect:/admin";
     }
