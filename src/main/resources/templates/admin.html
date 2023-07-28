@@ -19,9 +19,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <body>
 
-<form action="/new" method="post">
-    <button type="submit">Create</button></form>
-
 <br>
 <br>
 <a href="/new">New</a>
@@ -61,84 +58,84 @@
 <br>
 <br>
 
-<h1>All users</h1>
-<form method="post" action="/addNewUser">
+<!--<h1>All users</h1>-->
+<!--<form method="post" action="/addNewUser">-->
 
-    <label for="name">Name</label>
-    <input name="name" type="text" id="name"/>
+<!--    <label for="name">Name</label>-->
+<!--    <input name="name" type="text" id="name"/>-->
 
-    <br>
+<!--    <br>-->
 
-    <label for="surname">Surname</label>
-    <input name="surname" type="text" id="surname"/>
+<!--    <label for="surname">Surname</label>-->
+<!--    <input name="surname" type="text" id="surname"/>-->
 
-    <br>
+<!--    <br>-->
 
-    <label for="age">Age</label>
-    <input name="age" type="text" id="age"/>
+<!--    <label for="age">Age</label>-->
+<!--    <input name="age" type="text" id="age"/>-->
 
-    <br>
+<!--    <br>-->
 
-    <label for="email">Email</label>
-    <input name="email" type="text" id="email"/>
+<!--    <label for="email">Email</label>-->
+<!--    <input name="email" type="text" id="email"/>-->
 
-    <br>
+<!--    <br>-->
 
-    <label for="password">Password</label>
-    <input name="password" type="text" id="password"/>
+<!--    <label for="password">Password</label>-->
+<!--    <input name="password" type="text" id="password"/>-->
 
-    <br>
+<!--    <br>-->
 
-    <label for="roles">Role</label>
-    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
-        <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
-            <th:block th:text="${role.userRole}">
-            </th:block>
-        </option>>
-        <input type="submit" value="Add User">
-</form>
+<!--    <label for="roles">Role</label>-->
+<!--    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>-->
+<!--        <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">-->
+<!--            <th:block th:text="${role.userRole}">-->
+<!--            </th:block>-->
+<!--        </option>>-->
+<!--        <input type="submit" value="Add User">-->
+<!--</form>-->
 
-<br>
-<br>
-
-
-<form action="/findUsersById" method="get">
-    <label for="name">Get User by ID</label>
-    <label>
-        <input type="text" name="id"
-               placeholder="Write user ID"/>
-    </label>
-    <br>
-    <td><input type="submit" value="Find User"/></td>
-</form>
-
-<br>
-<br>
+<!--<br>-->
+<!--<br>-->
 
 
-<form action="/editUserById" method="get">
-    <label for="name">Edit Users By ID</label>
-    <label>
-        <input type="text" name="id"
-               placeholder="Write user ID"/>
-    </label>
-    <br>
-    <td><input type="submit" value="Edit User"/></td>
-</form>
+<!--<form action="/findUsersById" method="get">-->
+<!--    <label for="name">Get User by ID</label>-->
+<!--    <label>-->
+<!--        <input type="text" name="id"-->
+<!--               placeholder="Write user ID"/>-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    <td><input type="submit" value="Find User"/></td>-->
+<!--</form>-->
 
-<br><br>
+<!--<br>-->
+<!--<br>-->
 
 
-<form action="/deleteUserById" method="get">
-    <input type="hidden" name="_method" value="DELETE">
-    <label for="name">Delete Users By ID</label>
-    <label>
-        <input type="text" name="id"
-               placeholder="Write user ID"/>
-    </label>
-    <br>
-    <td><input type="submit" value="Remove User"/></td>
-</form>
+<!--<form action="/editUserById" method="get">-->
+<!--    <label for="name">Edit Users By ID</label>-->
+<!--    <label>-->
+<!--        <input type="text" name="id"-->
+<!--               placeholder="Write user ID"/>-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    <td><input type="submit" value="Edit User"/></td>-->
+<!--</form>-->
+
+<!--<br><br>-->
+
+
+<!--<form action="/deleteUserById" method="get">-->
+<!--    <input type="hidden" name="_method" value="DELETE">-->
+<!--    <label for="name">Delete Users By ID</label>-->
+<!--    <label>-->
+<!--        <input type="text" name="id"-->
+<!--               placeholder="Write user ID"/>-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    <td><input type="submit" value="Remove User"/></td>-->
+<!--</form>-->
 
 <br><br>
 
