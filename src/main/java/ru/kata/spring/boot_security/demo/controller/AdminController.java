@@ -33,7 +33,6 @@ public class AdminController {
     public String newUser(@ModelAttribute("user") User user, Model model) {
 
         model.addAttribute("users", new User());
-//        model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
         return "new";
     }
