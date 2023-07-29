@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
-import ru.kata.spring.boot_security.demo.util.UsersValidator;
+//import ru.kata.spring.boot_security.demo.util.UsersValidator;
 
 import javax.validation.Valid;
 
@@ -17,13 +17,13 @@ public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final UsersValidator usersValidator;
+//    private final UsersValidator usersValidator;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, UsersValidator usersValidator) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.usersValidator = usersValidator;
+//        this.usersValidator = usersValidator;
     }
 
 
@@ -47,7 +47,7 @@ public class AdminController {
     public String saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult, Model model) {
 
-        usersValidator.validate(user, bindingResult);
+//        usersValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "new";
@@ -90,7 +90,7 @@ public class AdminController {
                        BindingResult bindingResult,
                        @PathVariable("id") Long id) {
 
-        usersValidator.validate(user, bindingResult);
+//        usersValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "edit";

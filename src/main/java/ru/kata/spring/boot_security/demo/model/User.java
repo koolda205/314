@@ -40,7 +40,7 @@ public class User implements UserDetails {
     @Column(name = "email")
     @NotEmpty(message = "Поле не должно быть пустым")
     @Email(message = "введите в формате имя@почта.домен")
-    @UniqueElements(message = "такой email уже используется")
+//    @UniqueElements(message = "такой email уже используется")
     private String email;
 
     @Column(name = "password")
