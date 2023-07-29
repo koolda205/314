@@ -40,6 +40,8 @@
         <th>Email</th>
 <!--        <th>Password</th>-->
         <th>Role</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
     <tr th:each="user : ${users}">
@@ -50,6 +52,8 @@
         <td th:utext=" ${user.age}">
         <td th:utext="${user.email}">
 <!--        <td th:utext="${user.password}">-->
+        <td th:utext="${user.roles}">
+        <td><a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a></td>
         <td th:utext="${user.roles}">
     </tr>
 

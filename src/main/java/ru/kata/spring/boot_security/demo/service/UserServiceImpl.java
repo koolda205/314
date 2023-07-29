@@ -10,7 +10,6 @@ import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,7 +35,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(Long id, User user) {
+        User udatedUser = getUserById(id);
+        udatedUser.setName(user.getName());
+        udatedUser.setSurname(user.getSurname());
+        udatedUser.setEmail(user.getEmail());
+        udatedUser.setAge(user.getAge());
+        udatedUser.setRoles(user.getRoles());
         if (!user.getPassword().equals(userDao.getUserById(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
