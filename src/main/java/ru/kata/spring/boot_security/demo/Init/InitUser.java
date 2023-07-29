@@ -38,13 +38,13 @@ public class InitUser {
         userSet.add(roleUser);
 
 
-        User user = new User("Sergey", "Petrov", 23, "petrov@mail.ru",
+        User user = new User("Anatoly", "Petrov", 23, "petrov@mail.ru",
                 "user", userSet);
 
-        User user1 = new User("Dm", "ad", 33, "ad@ad.ad",
+        User user1 = new User("John", "Rogue", 33, "ad@ad.ad",
                 "ad", adminSet);
 
-        User user2 = new User("Dmitrii", "Kulakov", 33, "kulakov@gmail.com",
+        User user2 = new User("Tom", "Kulakov", 33, "kulakov@gmail.com",
                 "admin", adminSet);
 
         User user3 = new User("admin", "admin", 33, "admin@admin.ru",
