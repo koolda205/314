@@ -20,8 +20,9 @@
 <body>
 
 <br>
-<br>
+<hr>
 <a href="/new">New</a>
+
 
 <br/><br/>
 
@@ -54,7 +55,10 @@
 <!--        <td th:utext="${user.password}">-->
         <td th:utext="${user.roles}">
         <td><a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a></td>
-        <td th:utext="${user.roles}">
+        <td>
+            <form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
+            <input type="submit" value="Delete"/></form>
+        </td>
     </tr>
 
 </table>

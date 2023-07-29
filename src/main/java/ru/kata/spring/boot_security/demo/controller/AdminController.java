@@ -80,12 +80,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/deleteUserById")
-    public String deleteUser(@RequestParam(value = "id", required = false) Long id) {
+   @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
 
-        if (userService.getUserById(id) == null) {
-            return "error-page";
-        }
+//        if (userService.getUserById(id) == null) {
+//            return "error-page";
+//        }
         userService.deleteUser(id);
 
         return "redirect:/admin";
