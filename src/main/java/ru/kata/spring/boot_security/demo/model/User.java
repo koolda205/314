@@ -6,6 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,18 +23,27 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Длина мин 2, макс 30")
     private String name;
 
     @Column(name = "surname")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Длина мин 2, макс 30")
     private String surname;
 
     @Column(name = "age")
+    @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
 
     @Column(name = "email")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Email(message = "введите в формате имя@почта.домен")
     private String email;
 
     @Column(name = "password")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Длина мин 2, макс 30")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
