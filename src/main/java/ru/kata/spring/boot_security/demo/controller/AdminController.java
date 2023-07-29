@@ -40,6 +40,7 @@ public class AdminController {
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
 
+        model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
         userService.saveUser(user);
 
@@ -58,8 +59,8 @@ public class AdminController {
         return "user-info";
     }
 
-    @GetMapping("/editUserById")
-    public String editUsersById(@RequestParam(value = "id", required = false) Long id, Model model) {
+    @GetMapping("/{id}/editUserById")
+    public String editUsersById(Model model, @PathVariable("id") Long id) {
 
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("users", userService.getAllUsers());

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Edit page</title>
+    <title>New person</title>
 </head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,51 +19,43 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <body>
 
-<h2>Edit User</h2>
+<form th:method="POST" th:action="@{/addNewUser}" th:object="${users}">
 
-<form method="post" action="/editUser" th:object="${user}">
-    <input type="hidden" name="_method" value="PATCH">
+    <label for="name">First name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+
     <br>
-        <label for="id">Id</label>
-        <input readonly type="number" th:field="*{id}" id="id">
+
+    <label for="surname">Last Name</label>
+    <input name="surname" type="text" id="surname"/>
+
     <br>
+
+    <label for="age">Age</label>
+    <input name="age" type="text" id="age"/>
+
     <br>
-        <label for="name">Name</label>
-        <input type="text" th:field="*{name}" id="name" required/>
+
+    <label for="email">Email</label>
+    <input name="email" type="text" id="email"/>
+
     <br>
+
+    <label for="password">Password</label>
+    <input name="password" type="text" id="password"/>
+
     <br>
-        <label for="surname">Surname</label>
-        <input type="text" th:field="*{surname}" id="surname" required/>
-    <br>
-    <br>
-        <label for="age">Age</label>
-        <input type="text" th:field="*{age}" id="age" required/>
-    <br>
-    <br>
-        <label for="email">Email</label>
-        <input type="text" th:field="*{email}" id="email" required/>
-    <br>
-    <br>
-        <label for="password">Password</label>
-        <input type="text" th:field="*{password}" id="password" required/>
-    <br>
-    <br>
+
     <label for="roles">Role</label>
     <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
         <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
             <th:block th:text="${role.userRole}">
             </th:block>
         </option>>
-        <input type="submit" value="Edit User">
-</form>
+        <input type="submit" value="Add User"/>
 
-    <br>
-    <br>
-
-<br><br>
-<a href="/admin">Back</a>
-<br><br>
-
+        <br>
+        <br>
 
 </body>
 </html>
