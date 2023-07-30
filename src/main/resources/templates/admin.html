@@ -23,9 +23,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="text-left">
-                Заголовок
-            </h3>
+            <h1 class="text-left">
+                Admin page
+            </h1>
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-hover">
-                                        <caption><h2>All users</h2></caption>
+                                        <caption><h3>All users</h3></caption>
                                         <tr>
                                             <th>Id</th>
                                             <th>First Name</th>
@@ -106,63 +106,21 @@
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="myModalLabel">
-                                                                                Modal title
+                                                                                Edit User
                                                                             </h5>
                                                                             <button type="button" class="close" data-dismiss="modal">
                                                                                 <span aria-hidden="true">×</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}" th:object="${user}">
-
-                                                                                <label for="name">First name</label>
-                                                                                <input type="text" th:field="*{name}" id="name1"/>
-                                                                                <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-
-                                                                                <br>
-
-                                                                                <label for="surname">Last Name</label>
-                                                                                <input type="text" th:field="*{surname}" id="surname1"/>
-                                                                                <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>
-
-                                                                                <br>
-
-                                                                                <label for="age">Age</label>
-                                                                                <input type="text" th:field="*{age}" id="age1"/>
-                                                                                <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
-
-                                                                                <br>
-
-                                                                                <label for="email">Email</label>
-                                                                                <input type="text" th:field="*{email}" id="email1"/>
-                                                                                <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-                                                                                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
-
-                                                                                <br>
-
-                                                                                <label for="password">Password</label>
-                                                                                <input type="text" th:field="*{password}" id="password1"/>
-
-                                                                                <br>
-
-                                                                                <label for="roles">Role</label>
-                                                                                <select multiple class="form-control form-control-sm" id="roles1" name="roles" size="2" required>
-                                                                                    <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
-                                                                                        <th:block th:text="${role.userRole}">
-                                                                                        </th:block>
-                                                                                    </option>>
-                                                                                    <input type="submit" value="Delete"/>
-
-                                                                                    <br>
-                                                                                    <br>
+                                                                        <a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a>
                                                                         </div>
                                                                         <div class="modal-footer">
 
                                                                             <button type="button" class="btn btn-primary">
-                                                                                Close
+                                                                                <a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a>
                                                                             </button>
                                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                                                Edit
+                                                                                Close
                                                                             </button>
                                                                         </div>
                                                                     </div>
