@@ -50,7 +50,7 @@ public class AdminController {
 //        usersValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "new";
+            return "redirect:/admin";
         }
 
         model.addAttribute("users", new User());

@@ -20,67 +20,134 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <body>
 
-<br>
-
-<a href="/new">New</a>
-
-
-<br/><br/>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover">
-                    <caption><h2>All users</h2></caption>
-                    <tr>
-                        <th>Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-
-                    <tr th:each="user : ${users}">
-                        <td th:utext="${user.id}">
-                        <td><a th:href="@{/findUsersById{id}(id=${user.getId()})}"
-                               th:text="${user.getName()}">user</a></td>
-                        <td th:utext=" ${user.surname}">
-                        <td th:utext=" ${user.age}">
-                        <td th:utext="${user.email}">
-                        <td th:utext="${user.roles}">
-                        <td>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-info btn-sm">
-                                            <a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-sm btn-danger">
-                                            <a th:href="@{{id}/delete(id=${user.getId()})}">Delete</a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-            </table>
+            <h3 class="text-left">
+                Заголовок
+            </h3>
         </div>
     </div>
 </div>
 
-<br>
-<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tabbable" id="tabs-207257">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active show" href="#tab1" data-toggle="tab">Section 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tab2" data-toggle="tab">Section 2</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-953699">
+                        <p>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-hover">
+                                        <caption><h2>All users</h2></caption>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Age</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+
+                                        <tr th:each="user : ${users}">
+                                            <td th:utext="${user.id}">
+<!--                                            <td><a th:href="@{/findUsersById{id}(id=${user.getId()})}"-->
+<!--                                                   th:text="${user.getName()}">user</a></td>-->
+                                            <td th:utext="${user.name}">
+                                            <td th:utext=" ${user.surname}">
+                                            <td th:utext=" ${user.age}">
+                                            <td th:utext="${user.email}">
+                                            <td th:utext="${user.roles}">
+                                            <td>
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button type="button" class="btn btn-info btn-sm">
+                                                                <a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button type="button" class="btn btn-sm btn-danger">
+                                                                <a th:href="@{{id}/delete(id=${user.getId()})}">Delete</a>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <p>
+                        <form th:method="POST" th:action="@{/addNewUser}" th:object="${users}">
+
+                            <label for="name">First name</label>
+                            <input name="name" type="text" id="name"/>
+<!--                            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>-->
+
+                            <br>
+
+                            <label for="surname">Last Name</label>
+                            <input name="surname" type="text" id="surname"/>
+<!--                            <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>-->
+
+                            <br>
+
+                            <label for="age">Age</label>
+                            <input name="age" type="text" id="age"/>
+<!--                            <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>-->
+
+                            <br>
+
+                            <label for="email">Email</label>
+                            <input name="email" type="text" id="email"/>
+<!--                            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>-->
+
+                            <br>
+
+                            <label for="password">Password</label>
+                            <input name="password" type="text" id="password"/>
+<!--                            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
+
+                            <br>
+
+                            <label for="roles">Role</label>
+                            <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
+                                <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
+                                    <th:block th:text="${role.userRole}">
+                                    </th:block>
+                                </option>>
+                                <input type="submit" value="Add User"/>
+
+                                </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>
