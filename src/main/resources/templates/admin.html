@@ -36,10 +36,10 @@
             <div class="tabbable" id="tabs-207257">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active show" href="#tab1" data-toggle="tab">Section 1</a>
+                        <a class="nav-link active show" href="#tab1" data-toggle="tab">Users table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#tab2" data-toggle="tab">Section 2</a>
+                        <a class="nav-link" href="#tab2" data-toggle="tab">New user</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -59,6 +59,7 @@
                                             <th>Role</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
+                                            <th>Test</th>
                                         </tr>
 
                                         <tr th:each="user : ${users}">
@@ -92,6 +93,90 @@
                                                     </div>
                                                 </div>
                                             </td>
+
+                                            <td>
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button type="button" class="btn btn-sm btn-danger">
+                                                            <a id="modal-499339" href="#modal-container-499339" role="button" class="btn" data-toggle="modal">Edit</a>
+                                                            </button>
+                                                            <div class="modal fade" id="modal-container-499339" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="myModalLabel">
+                                                                                Modal title
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}" th:object="${user}">
+
+                                                                                <label for="name">First name</label>
+                                                                                <input type="text" th:field="*{name}" id="name1"/>
+                                                                                <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+
+                                                                                <br>
+
+                                                                                <label for="surname">Last Name</label>
+                                                                                <input type="text" th:field="*{surname}" id="surname1"/>
+                                                                                <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>
+
+                                                                                <br>
+
+                                                                                <label for="age">Age</label>
+                                                                                <input type="text" th:field="*{age}" id="age1"/>
+                                                                                <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+
+                                                                                <br>
+
+                                                                                <label for="email">Email</label>
+                                                                                <input type="text" th:field="*{email}" id="email1"/>
+                                                                                <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+                                                                                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+
+                                                                                <br>
+
+                                                                                <label for="password">Password</label>
+                                                                                <input type="text" th:field="*{password}" id="password1"/>
+
+                                                                                <br>
+
+                                                                                <label for="roles">Role</label>
+                                                                                <select multiple class="form-control form-control-sm" id="roles1" name="roles" size="2" required>
+                                                                                    <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
+                                                                                        <th:block th:text="${role.userRole}">
+                                                                                        </th:block>
+                                                                                    </option>>
+                                                                                    <input type="submit" value="Delete"/>
+
+                                                                                    <br>
+                                                                                    <br>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <button type="button" class="btn btn-primary">
+                                                                                Close
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                                                Edit
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
                                         </tr>
                                     </table>
                                 </div>
