@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -26,45 +27,44 @@
 
 <br/><br/>
 
-<table th:border="1" th:width="500" th:high="300" th:color="red">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                    <caption><h2>All users</h2></caption>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
 
-    <caption><h2>Admin panel</h2></caption>
-
-    <br/><br/>
-
-
-    <tr>
-        <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-
-    <tr th:each="user : ${users}">
-        <td th:utext="${user.id}">
-        <td><a th:href="@{/findUsersById{id}(id=${user.getId()})}"
-               th:text="${user.getName()}">user</a></td>
-        <td th:utext=" ${user.surname}">
-        <td th:utext=" ${user.age}">
-        <td th:utext="${user.email}">
-        <td th:utext="${user.roles}">
-        <td><a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a></td>
-        <td>
-            <form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
-            <input type="submit" value="Delete"/></form>
-        </td>
-    </tr>
-
-</table>
+                    <tr th:each="user : ${users}">
+                        <td th:utext="${user.id}">
+                        <td><a th:href="@{/findUsersById{id}(id=${user.getId()})}"
+                               th:text="${user.getName()}">user</a></td>
+                        <td th:utext=" ${user.surname}">
+                        <td th:utext=" ${user.age}">
+                        <td th:utext="${user.email}">
+                        <td th:utext="${user.roles}">
+                        <td><a th:href="@{{id}/editUserById(id=${user.getId()})}">Edit</a></td>
+                        <td>
+                            <form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
+                            <input type="submit" value="Delete"/></form>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>
 
 <br>
 <br>
 
-<br><br>
 
 <form action="/logout" method="post">
     <button type="submit">Exit</button>
