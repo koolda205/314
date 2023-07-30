@@ -101,8 +101,23 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-   @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+    @GetMapping("/{id}/delete")
+    public String deleteUsersById(Model model, @PathVariable("id") Long id) {
+
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("roles", roleService.getAllRoles());
+
+        if (userService.getUserById(id) == null) {
+            return "error-page";
+        }
+        return "delete";
+    }
+
+   @DeleteMapping("/delete/{id}")
+    public String deleteUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult,
+                             @PathVariable("id") Long id) {
 
         if (userService.getUserById(id) == null) {
             return "error-page";
