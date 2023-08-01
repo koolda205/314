@@ -9,64 +9,78 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 <body>
 
 <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}" th:object="${user}">
 
-    <label for="id">Id</label>
-    <input readonly type="number" th:field="*{id}" id="id">
+    <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input readonly type="number" class="form-control" th:field="*{id}" id="id">
 
-    <br>
-
-    <label for="name">First name</label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-
-    <br>
-
-    <label for="surname">Last Name</label>
-    <input type="text" th:field="*{surname}" id="surname"/>
-    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>
-
-    <br>
-
-    <label for="age">Age</label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
-
-    <br>
-
-    <label for="email">Email</label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
-
-    <br>
-
-    <label for="password">Password</label>
-    <input type="text" th:field="*{password}" id="password"/>
-
-    <br>
-
-    <label for="roles">Role</label>
-    <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
-        <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
-            <th:block th:text="${role.userRole}">
-            </th:block>
-        </option>>
-        <input type="submit" value="Delete"/>
 
         <br>
-        <br>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">First name</label>
+            <input readonly type="text" class="form-control" th:field="*{name}" id="name"/>
+            <!--    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>-->
+
+            <br>
+
+            <div class="mb-3">
+                <label for="surname" class="form-label">Last Name</label>
+                <input readonly type="text" class="form-control" th:field="*{surname}" id="surname"/>
+                <!--    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>-->
+
+                <br>
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input readonly type="text" class="form-control" th:field="*{age}" id="age"/>
+                    <!--    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>-->
+
+                    <br>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input readonly type="text" class="form-control" th:field="*{email}" id="email"/>
+                        <!--    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>-->
+
+                        <br>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input readonly type="text" class="form-control" th:field="*{password}" id="password"/>
+                            <!--    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{passsword}">Password error</div>-->
+
+                            <br>
+
+                            <label for="roles">Role</label>
+                            <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2"
+                                    required>
+                                <option th:each="role: ${roles}" th:value="${role.id}"
+                                        th:selected="${user.roles.contains(role)}">
+                                    <th:block th:text="${role.userRole}">
+                                    </th:block>
+                                </option>
+                                >
+                                <input type="submit" value="Delete"/>
+
+                                <br>
+                                <br>
 
 </body>
 </html>
