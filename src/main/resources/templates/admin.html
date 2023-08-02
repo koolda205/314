@@ -115,7 +115,7 @@
                                                                    th:value="${user.email}"/>
                                                             <br>
                                                             <label for="password0"><b>Password</b></label>
-                                                            <input th:name="password" type="text"
+                                                            <input th:name="password" th:type="text"
                                                                    class="form-control" id="password0"
                                                                    th:value="${user.password}"/>
                                                             <br>
@@ -187,7 +187,7 @@
                                                                     </th:block>
                                                                 </option>
                                                                 <input type="submit" value="Delete"/>
-                                                        <div class="modal-footer">
+                                                            <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close
                                                             </button>
