@@ -38,21 +38,26 @@ public class InitUser {
         userSet.add(roleUser);
 
 
+
         User user = new User("Anatoly", "Petrov", 23, "petrov@mail.ru",
                 "user", userSet);
 
-        User user1 = new User("John", "Rogue", 33, "ad@ad.ad",
+        User user1 = new User("John", "Rogue", 55, "ad@ad.ad",
                 "ad", adminSet);
 
-        User user2 = new User("Tom", "Kulakov", 33, "kulakov@gmail.com",
+        User user2 = new User("Tom", "Kulakov", 44, "kulakov@gmail.com",
                 "admin", adminSet);
 
         User user3 = new User("admin", "admin", 33, "admin@admin.ru",
                 "admin", adminSet);
 
+        User user4 = new User("user", "user", 22, "user@user.ru",
+                "user", userSet);
+
         userService.saveUser(user);
         userService.saveUser(user1);
         userService.saveUser(user2);
         userService.saveUser(user3);
+        userService.saveUser(user4);
     }
 }
