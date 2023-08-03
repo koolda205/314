@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.model;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,7 +39,6 @@ public class User implements UserDetails {
     @Column(name = "email")
     @NotEmpty(message = "Поле не должно быть пустым")
     @Email(message = "введите в формате имя@почта.домен")
-//    @UniqueElements(message = "такой email уже используется")
     private String email;
 
     @Column(name = "password")
