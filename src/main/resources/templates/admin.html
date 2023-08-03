@@ -91,7 +91,7 @@
                                                                 aria-label="Close"></button>
                                                     </div>
                                                     <form th:action="@{/editUser/{id}(id=${user.getId()})}"
-                                                          th:object="${user}" th:method="PUT">
+                                                          th:method="POST">
                                                         <div class="modal-body col-md text-center">
                                                             <br>
                                                             <label for="name0"><b>Name</b></label>
@@ -126,7 +126,7 @@
                                                                     </th:block>
                                                                 </option>
                                                             </select>
-                                                            <br><br>
+<!--                                                            <br><br>-->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary">
