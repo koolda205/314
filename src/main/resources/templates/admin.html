@@ -72,8 +72,8 @@
                                         <td th:text="${user.roles}">roles</td>
                                         <td>
                                             <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                               data-bs-target="#editModal"
-                                               th:data-bs-target="${'#editModal'+user.id}">Edit</a>
+                                               data-bs-target="#EDIT"
+                                               th:data-bs-target="${'#EDIT'+user.id}">Edit</a>
                                         </td>
                                         <td>
                                             <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -81,17 +81,17 @@
                                                th:data-bs-target="${'#DELETE'+user.id}">Delete</a>
                                         </td>
 
-                                        <div class="modal fade" th:id="${'editModal'+user.id}"
+                                        <div class="modal fade" th:id="${'EDIT'+user.id}"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" modal-dialog-centered>
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel">Edit user</h5>
+                                                        <h5 class="modal-title" id="EDIT">Edit user</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
                                                     </div>
                                                     <form th:action="@{/editUser/{id}(id=${user.getId()})}"
-                                                          th:method="POST">
+                                                          th:method="PATCH">
                                                         <div class="modal-body col-md text-center">
                                                             <br>
                                                             <label for="name0"><b>Name</b></label>
@@ -126,7 +126,6 @@
                                                                     </th:block>
                                                                 </option>
                                                             </select>
-<!--                                                            <br><br>-->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary">
