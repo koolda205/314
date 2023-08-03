@@ -124,9 +124,8 @@
                                                                 <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
                                                                     <th:block th:text="${role.userRole}">
                                                                     </th:block>
-                                                                </option>>
-                                                                <input type="submit" value="Update User"/>
-                                                        </div>
+                                                                </option>
+                                                            <select/>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary">
                                                                 Edit

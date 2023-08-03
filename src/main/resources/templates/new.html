@@ -54,20 +54,20 @@
 
                                 <label for="name"><b>First Name</b></label>
                                 <input th:name="name" th:type="text" class="form-control" id="name" required/>
-                                <br>
+
                                 <label for="surname"><b>Last Name</b></label>
                                 <input th:name="surname" th:type="text" class="form-control" id="surname" required/>
-                                <br>
+
                                 <label for="age"><b>Age</b></label>
                                 <input th:name="age" th:type="number" class="form-control" id="age"/>
-                                <br>
+
                                 <label for="email"><b>Email</b></label>
                                 <input th:name="email" th:type="text" class="form-control" id="email" required/>
-                                <br>
+
                                 <label for="password"><b>Password</b></label>
                                 <input th:name="password" th:field="*{password}" th:type="password" class="form-control"
                                        id="password"/>
-                                <br>
+
                                 <label for="roles"><b>Role</b></label>
                                 <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
                                     <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
