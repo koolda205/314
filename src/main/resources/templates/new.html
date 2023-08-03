@@ -49,33 +49,46 @@
                         </div>
                         <div class="col-md bg-white border">
                             <form align="center" class="offset-md-4 col-md-3 mt-4 mb-4"
-                                  th:align="center"
-                                  th:action="@{/addNewUser}" th:object="${user}" method="POST">
-                                <label for="name"><b>Name</b></label>
-                                <input th:name="name" th:type="text" class="form-control" id="name" required/>
+                                  th:align="center" th:method="POST"
+                                  th:action="@{/addNewUser}" th:object="${users}">
+
+                                <label for="name">First name</label>
+                                <input type="text" th:field="*{name}" id="name"/>
+                                <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+
                                 <br>
-                                <label for="surname"><b>Surname</b></label>
-                                <input th:name="surname" th:type="text" class="form-control" id="surname" required/>
+
+                                <label for="surname">Last Name</label>
+                                <input name="surname" type="text" id="surname"/>
+                                <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name error</div>
+
                                 <br>
-                                <label for="age"><b>Age</b></label>
-                                <input th:name="age" th:type="number" class="form-control" id="age"/>
+
+                                <label for="age">Age</label>
+                                <input name="age" type="text" id="age"/>
+                                <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+
                                 <br>
-                                <label for="email"><b>Email</b></label>
-                                <input th:name="email" th:type="text" class="form-control" id="email" required/>
+
+                                <label for="email">Email</label>
+                                <input name="email" type="text" id="email"/>
+                                <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+
                                 <br>
-                                <label for="password"><b>Password</b></label>
-                                <input th:name="password" th:field="*{password}" th:type="password" class="form-control"
-                                       id="password"/>
+
+                                <label for="password">Password</label>
+                                <input name="password" type="text" id="password"/>
+                                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+
                                 <br>
-                                <label for="roles"><b>Role</b></label>
+
+                                <label for="roles">Role</label>
                                 <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
-                                    <option th:each="role: ${roles}" th:value="${role.userRole}" th:selected="${user.roles.contains(role)}">
+                                    <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
                                         <th:block th:text="${role.userRole}">
                                         </th:block>
-                                    </option>
-                                </select>
-                                <br>
-                                <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Add new user</button>
+                                    </option>>
+                                    <input type="submit" value="Add User"/>
                             </form>
                         </div>
                     </div>
