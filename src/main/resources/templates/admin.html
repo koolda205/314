@@ -179,6 +179,7 @@
                                                                    class="form-control"
                                                                    id="email1" th:value="${user.email}" disabled/>
                                                             <br>
+                                                            <label for="roles1"><b>Roles</b></label>
                                                             <select multiple class="form-control form-control-sm" id="roles1" name="roles" size="2"
                                                                     required>
                                                                 <option th:each="role: ${roles}" th:value="${role.id}"
