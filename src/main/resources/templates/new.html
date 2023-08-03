@@ -50,9 +50,7 @@
                         <div class="col-md bg-white border">
                             <form align="center" class="offset-md-4 col-md-3 mt-4 mb-4"
                                   th:align="center"
-                                  th:action="@{/addNewUser}"
-                                  th:object="${user}"
-                                  method="POST">
+                                  th:action="@{/addNewUser}" th:object="${user}" method="POST">
                                 <label for="name"><b>Name</b></label>
                                 <input th:name="name" th:type="text" class="form-control" id="name" required/>
                                 <br>
@@ -77,8 +75,7 @@
                                     </option>
                                 </select>
                                 <br>
-                                <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Add new user
-                                </button>
+                                <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Add new user</button>
                             </form>
                         </div>
                     </div>
