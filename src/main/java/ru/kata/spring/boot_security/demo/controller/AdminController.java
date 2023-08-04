@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class AdminController {
@@ -23,12 +25,13 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-
     @GetMapping("/admin")
-    public String showAdminPage(@ModelAttribute("user") User user, Model model) {
+    public String showAdminPage(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("user", user);
+
         return "admin";
     }
 
