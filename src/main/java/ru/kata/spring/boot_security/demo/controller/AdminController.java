@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class AdminController {
@@ -45,11 +43,7 @@ public class AdminController {
 
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:/admin";
-        }
+                          Model model) {
 
         model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
@@ -70,19 +64,6 @@ public class AdminController {
         return "user-info";
     }
 
-    @GetMapping("/{id}/editUserById")
-    public String editUsersById(Model model, @PathVariable("id") Long id) {
-
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("roles", roleService.getAllRoles());
-
-        if (userService.getUserById(id) == null) {
-            return "error-page";
-        }
-        return "edit";
-    }
-
     @PatchMapping("/editUser/{id}")
     public String edit(@ModelAttribute("user") @Valid User user,
 
@@ -93,22 +74,8 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/delete")
-    public String deleteUsersById(Model model, @PathVariable("id") Long id) {
-
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("roles", roleService.getAllRoles());
-
-        if (userService.getUserById(id) == null) {
-            return "error-page";
-        }
-        return "delete";
-    }
-
    @DeleteMapping("/delete/{id}")
     public String deleteUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult,
                              @PathVariable("id") Long id) {
 
         if (userService.getUserById(id) == null) {
