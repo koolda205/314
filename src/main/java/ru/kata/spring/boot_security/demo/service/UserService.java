@@ -28,9 +28,16 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public boolean saveUser(User user) {
+
+        if (userRepository.findByEmail(user.getEmail()) == null ||
+                (!(userRepository.findByEmail(user.getEmail())).equals(user))) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Transactional

@@ -47,6 +47,10 @@ public class AdminController {
 
         model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
+
+        if (userService.saveUser(user) == false) {
+            return "redirect:/admin";
+        }
         userService.saveUser(user);
 
         return "redirect:/admin";
@@ -58,9 +62,6 @@ public class AdminController {
 
         model.addAttribute("user", userService.getUserById(id));
 
-        if (userService.getUserById(id) == null) {
-            return "error-page";
-        }
         return "user-info";
     }
 
@@ -80,12 +81,6 @@ public class AdminController {
         userService.deleteUser(id);
 
         return "redirect:/admin";
-    }
-
-    @GetMapping("/error-page")
-    public String errorPage() {
-
-        return "error-page";
     }
 
 }
