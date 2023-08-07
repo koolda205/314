@@ -22,13 +22,6 @@ public class RoleService {
         return (List<Role>) roleRepository.findAll();
     }
 
-
-    public Role getRole(String userRole) {
-        return roleRepository.findByUserRole(userRole);
-    }
-
-
-
     @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);

@@ -43,7 +43,7 @@ public class AdminController {
 
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
-                          Model model) {
+                           Model model) {
 
         model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
@@ -58,7 +58,7 @@ public class AdminController {
 
         model.addAttribute("user", userService.getUserById(id));
 
-        if (userService.getUserById(id) == null)  {
+        if (userService.getUserById(id) == null) {
             return "error-page";
         }
         return "user-info";
@@ -66,7 +66,6 @@ public class AdminController {
 
     @PatchMapping("/editUser/{id}")
     public String edit(@ModelAttribute("user") @Valid User user,
-
                        @PathVariable("id") Long id) {
 
         userService.updateUser(id, user);
@@ -74,22 +73,19 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-   @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@ModelAttribute("user") @Valid User user,
                              @PathVariable("id") Long id) {
 
-        if (userService.getUserById(id) == null) {
-            return "error-page";
-        }
         userService.deleteUser(id);
 
         return "redirect:/admin";
     }
 
-//    @GetMapping("/error-page")
-//    public String errorPage() {
-//
-//        return "error-page";
-//    }
+    @GetMapping("/error-page")
+    public String errorPage() {
+
+        return "error-page";
+    }
 
 }

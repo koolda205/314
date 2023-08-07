@@ -16,6 +16,4 @@ public class UsersController {
         model.addAttribute("user", user);
         return "user-info";
     }
-
-
 }
