@@ -1,23 +1,67 @@
 package ru.kata.spring.boot_security.demo.service;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService {
-    void saveUser(User user);
+@Service
+public class UserService implements UserDetailsService {
 
-    void updateUser(Long id, User user);
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    void deleteUser(long id);
+    @Autowired
+    @Lazy
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
 
-    List<User> getAllUsers();
+    @Transactional
+    public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
-    User getUserByEmail(String email);
+    @Transactional
+    public void updateUser(Long id, User user) {
 
-    User getUserById(long id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
-    Optional<User> show (String email);
+    @Transactional
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
+    }
+
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }
+
+    public User getUserById(long id) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        return userFromDb.orElse(new User());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(login);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
+    }
 }
