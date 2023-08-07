@@ -37,20 +37,21 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void updateUser(Long id, User user) {
-//        User udatedUser = getUserById(id);
-//        udatedUser.setName(user.getName());
-//        udatedUser.setSurname(user.getSurname());
-//        udatedUser.setEmail(user.getEmail());
-//        udatedUser.setAge(user.getAge());
-//        udatedUser.setRoles(user.getRoles());
+        User udatedUser = getUserById(id);
+        udatedUser.setName(user.getName());
+        udatedUser.setSurname(user.getSurname());
+        udatedUser.setEmail(user.getEmail());
+        udatedUser.setAge(user.getAge());
+        udatedUser.setRoles(user.getRoles());
 //        if (!user.getPassword().equals(userRepository.findById(user.getId()).getPassword())) {
 //            user.setPassword(passwordEncoder.encode(user.getPassword()));
 //        }
-//        userRepository.save(user);
+        udatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(udatedUser);
 
-        User udatedUser = getUserById(id);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+//        User udatedUser = getUserById(id);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userRepository.save(user);
     }
 
     @Transactional
@@ -67,7 +68,8 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserById(long id) {
-        return (User) userRepository.findAllById(Collections.singleton(id));
+        Optional<User> userFromDb = userRepository.findById(id);
+        return userFromDb.orElse(new User());
     }
 
 //    @Override

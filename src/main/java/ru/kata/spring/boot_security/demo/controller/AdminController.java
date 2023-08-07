@@ -86,4 +86,10 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+//    @GetMapping("/error-page")
+//    public String errorPage() {
+//
+//        return "error-page";
+//    }
+
 }
