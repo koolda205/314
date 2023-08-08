@@ -1,21 +1,20 @@
 package ru.kata.spring.boot_security.demo.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Component
 public class UserValidator implements Validator {
 
-    private final UserDetailsService userDetailsService;
+    private final UserService userService;
 
     @Autowired
-    public UserValidator(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public UserValidator(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -25,13 +24,16 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+
         User user = (User) target;
 
-        try {
-            userDetailsService.loadUserByUsername(user.getEmail());
-        } catch (UsernameNotFoundException ignored) {
-            return;
+        if(userService.getUserByEmail(user.getEmail()).isPresent()) {
+            errors.rejectValue("name", "", "Name error");
+            errors.rejectValue("surname", "", "Surname error");
+            errors.rejectValue("age", "", "Age error");
+            errors.rejectValue("email", "", "Email is alredy used");
+            errors.rejectValue("password", "", "Password error");
         }
-        errors.rejectValue("email", "", "Email is alredy used");
     }
 }
+

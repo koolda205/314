@@ -18,7 +18,6 @@ public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
-
     private final UserValidator userValidator;
 
     @Autowired
@@ -50,10 +49,6 @@ public class AdminController {
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult, Model model) {
-
-        model.addAttribute("users", new User());
-        model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("user", user);
 
         userValidator.validate(user, bindingResult);
 
