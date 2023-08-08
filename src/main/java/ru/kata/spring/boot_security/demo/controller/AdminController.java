@@ -50,6 +50,10 @@ public class AdminController {
     public String saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult, Model model) {
 
+//        model.addAttribute("users", new User());
+//        model.addAttribute("roles", roleService.getAllRoles());
+//        model.addAttribute("user", user);
+
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -86,7 +90,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@ModelAttribute("user") @Valid User user,
+    public String deleteUser(@AuthenticationPrincipal User user,
                              @PathVariable("id") Long id) {
 
         userService.deleteUser(id);
@@ -95,7 +99,10 @@ public class AdminController {
     }
 
     @GetMapping("/error-page")
-    public String errorPage() {
+    public String errorPage(@AuthenticationPrincipal User user, Model model) {
+
+        model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("user", user);
 
         return "error-page";
     }
