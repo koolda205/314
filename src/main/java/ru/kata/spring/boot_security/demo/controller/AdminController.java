@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
 
@@ -17,10 +19,13 @@ public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
 
+    private final UserValidator userValidator;
+
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService, UserValidator userValidator) {
         this.userService = userService;
         this.roleService = roleService;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/admin")
@@ -38,19 +43,24 @@ public class AdminController {
 
         model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("user", user);
         return "new";
     }
 
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
-                           Model model) {
+                           BindingResult bindingResult, Model model) {
 
         model.addAttribute("users", new User());
         model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("user", user);
 
-        if (userService.saveUser(user) == false) {
-            return "redirect:/admin";
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "new";
         }
+
         userService.saveUser(user);
 
         return "redirect:/admin";
@@ -67,8 +77,14 @@ public class AdminController {
 
     @PatchMapping("/editUser/{id}")
     public String edit(@ModelAttribute("user") @Valid User user,
+                       BindingResult bindingResult,
                        @PathVariable("id") Long id) {
 
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/admin";
+        }
         userService.updateUser(id, user);
 
         return "redirect:/admin";
