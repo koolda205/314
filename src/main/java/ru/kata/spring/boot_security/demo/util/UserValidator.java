@@ -1,22 +1,21 @@
 package ru.kata.spring.boot_security.demo.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Component
 public class UserValidator implements Validator {
 
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public UserValidator(UserService userService) {
-        this.userService = userService;
+    public UserValidator(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class UserValidator implements Validator {
         User user = (User) target;
 
         try {
-            userService.loadUserByUsername(user.getEmail());
+            userDetailsService.loadUserByUsername(user.getEmail());
         } catch (UsernameNotFoundException ignored) {
             return;
         }
