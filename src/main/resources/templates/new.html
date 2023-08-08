@@ -51,23 +51,26 @@
                             <form align="center" class="offset-md-4 col-md-3 mt-4 mb-4"
                                   th:align="center" th:method="POST"
                                   th:action="@{/addNewUser}" th:object="${users}">
-
                                 <label for="name"><b>First Name</b></label>
-                                <input th:name="name" th:type="text" class="form-control" id="name" required/>
-
+                                <input th:type="text" th:field="*{name}" class="form-control" id="name" required/>
+                                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">First Name Error</div>
+                                <br/>
                                 <label for="surname"><b>Last Name</b></label>
-                                <input th:name="surname" th:type="text" class="form-control" id="surname" required/>
-
+                                <input th:type="text" th:field="*{surname}" class="form-control" id="surname" required/>
+                                <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Last Name Error</div>
+                                <br/>
                                 <label for="age"><b>Age</b></label>
-                                <input th:name="age" th:type="number" class="form-control" id="age"/>
-
+                                <input th:type="number" th:field="*{age}" class="form-control" id="age" required/>
+                                <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+                                <br/>
                                 <label for="email"><b>Email</b></label>
-                                <input th:name="email" th:type="text" class="form-control" id="email" required/>
-
+                                <input th:type="text" th:field="*{email}" class="form-control" id="email" required/>
+                                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                                <br/>
                                 <label for="password"><b>Password</b></label>
-                                <input th:name="password" th:field="*{password}" th:type="password" class="form-control"
-                                       id="password"/>
-
+                                <input th:type="password" th:field="*{password}" th:name="password" class="form-control" id="password"/>
+                                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                                <br/>
                                 <label for="roles"><b>Role</b></label>
                                 <select multiple class="form-control form-control-sm" id="roles" name="roles" size="2" required>
                                     <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
@@ -75,7 +78,7 @@
                                         </th:block>
                                     </option>
                                 </select>
-                                <br>
+                                <br/>
                                 <button th:type="submit" class="btn btn-success btn-lg" value="Add new user">Add new user</button>
                             </form>
                         </div>
