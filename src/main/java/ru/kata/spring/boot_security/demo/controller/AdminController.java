@@ -48,11 +48,7 @@ public class AdminController {
 
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult, Model model) {
-
-//        model.addAttribute("users", new User());
-//        model.addAttribute("roles", roleService.getAllRoles());
-//        model.addAttribute("user", user);
+                           BindingResult bindingResult) {
 
         userValidator.validate(user, bindingResult);
 
@@ -90,8 +86,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@AuthenticationPrincipal User user,
-                             @PathVariable("id") Long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
 
         userService.deleteUser(id);
 
