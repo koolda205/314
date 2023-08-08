@@ -58,7 +58,7 @@ public class AdminController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "new";
+            return "error-page";
         }
 
         userService.saveUser(user);
@@ -83,7 +83,7 @@ public class AdminController {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/admin";
+            return "error-page";
         }
         userService.updateUser(id, user);
 
