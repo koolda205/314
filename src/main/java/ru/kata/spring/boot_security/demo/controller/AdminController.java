@@ -28,14 +28,14 @@ public class AdminController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/index")
     public String showAdminPage(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
         model.addAttribute("user", user);
 
-        return "admin";
+        return "index";
     }
 
     @GetMapping("/new")
@@ -59,7 +59,7 @@ public class AdminController {
 
         userService.saveUser(user);
 
-        return "redirect:/admin";
+        return "redirect:/index";
     }
 
     @GetMapping("/findUsersById{id}")
@@ -83,7 +83,7 @@ public class AdminController {
         }
         userService.updateUser(id, user);
 
-        return "redirect:/admin";
+        return "redirect:/index";
     }
 
     @DeleteMapping("/delete/{id}")
@@ -91,7 +91,7 @@ public class AdminController {
 
         userService.deleteUser(id);
 
-        return "redirect:/admin";
+        return "redirect:/index";
     }
 
     @GetMapping("/user-info")

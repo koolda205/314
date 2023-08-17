@@ -101,7 +101,7 @@ public class RestUserController {
             throw new UserNotCreatedException(errorMsg.toString());
         }
 
-        userService.updateUser(convertToUser(userDTO));
+        userService.saveUser(convertToUser(userDTO));
 
         return  ResponseEntity.ok(HttpStatus.OK);
     }
