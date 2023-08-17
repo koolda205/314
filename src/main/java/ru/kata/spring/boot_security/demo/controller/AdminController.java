@@ -14,6 +14,7 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/")
 public class AdminController {
 
     private final UserService userService;
@@ -91,6 +92,12 @@ public class AdminController {
         userService.deleteUser(id);
 
         return "redirect:/admin";
+    }
+
+    @GetMapping("/user-info")
+    public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        return "user-info";
     }
 
     @GetMapping("/error-page")
