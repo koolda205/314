@@ -56,23 +56,25 @@
                                 </div>
                             </div>
 
-                            <div class="card-body" bg-primary text-white>
-                                <table class="table table-striped" id="mainTableWithUsers">
-                                    <thead>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <table class="table table-striped" id="mainTableWithUsers">
+                                        <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Surname</th>
                                             <th>Age</th>
                                             <th>Email</th>
-                                            <th>Role</th>
+                                            <th>Password</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,11 +95,7 @@
                 <input class="form-control" id="AddNewUserAge" type="number" placeholder="age"><br>
                 <input class="form-control" id="AddNewUserEmail" type="text" placeholder="email"><br>
                 <input class="form-control" id="AddNewUserPassword" type="password" placeholder="password"><br>
-                <select multiple class="form-control form-control-sm" id="AddNewUserRoles" name="roles" size="2" required>
-                    <option th:each="role: ${roles}" th:value="${role.id}" th:selected="${user.roles.contains(role)}">
-                        <th:block th:text="${role.userRole}">
-                        </th:block>
-                    </option>
+                <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new user</button>
             </form>
             <div class="p-2">
                 <button class="btn btn-outline-success" id="SliderNewUserForm">Show panel</button>
