@@ -1,87 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+    <link rel="stylesheet" href="style.css"/>
+
     <title>Users List</title>
 </head>
-<body class="text-center">
-<h1>Users List</h1>
+<body>
 
-<!--таблица юзеров-->
-<div class="container-fluid">
-
-    <div class="d-flex justify-content-center">
-        <div>
-            <table class="table table-striped" id="mainTableWithUsers">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Age</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+    <button id="btnCreate" type="button" class="btn btn-primary" data-bs-toggle="modal" >Create</button>
+    <table id = tableArticul class="table mt-2 table-bordered table-striped">
+        <thead>
+        <tr class="text-center">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 
-<!--форма заполнения нового юзера и две кнопки-->
-<div class="container-fluid">
-    <div class="d-flex justify-content-center">
-
-        <div class="form-group align-items-center">
-            <form id="defaultSomeForm" data-hidden=true style="display: none">
-                <input class="form-control" id="AddNewUserName" type="text" placeholder="name"><br>
-                <input class="form-control" id="AddNewUserSurname" type="text" placeholder="surname"><br>
-                <input class="form-control" id="AddNewUserAge" type="number" placeholder="age"><br>
-                <input class="form-control" id="AddNewUserEmail" type="text" placeholder="email"><br>
-                <input class="form-control" id="AddNewUserPassword" type="password" placeholder="password"><br>
-                <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new user</button>
-            </form>
-            <div class="p-2">
-                <button class="btn btn-outline-success" id="SliderNewUserForm">Show panel</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!--скрытое дефолтное модальное окно-->
-<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">
+<div id="modalArticul" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Add Users</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
-
-            <div class="modal-body">
-            </div>
-
-            <div class="modal-footer">
-            </div>
-
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="col-form-label">Name</label>
+                    <input id="name" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="surname" class="col-form-label">Surname</label>
+                    <input id="surname" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="col-form-label">Age</label>
+                    <input id="age" type="number" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="col-form-label">Email</label>
+                    <input id="email" type="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="col-form-label">Password</label>
+                    <input id="password" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rolesCreate" class="com-form-label">Role:</label>
+                    <select multiple id="rolesCreate" class="form-control select" size="2">
+                        <option value="ROLE_USER">USER</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                    </select>
+                </div>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </form>
     </div>
+</div>
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-<script src="webjars/jquery/3.5.1/jquery.js"></script>
-<script src="webjars/popper.js/1.16.0/umd/popper.js"></script>
-<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
 <script src="/js/app.js"></script>
+
 </body>
 </html>
